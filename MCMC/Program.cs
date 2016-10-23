@@ -4,25 +4,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace program
+namespace Main_MCMC
 {
-    public class Program
+    class program
     {
-        public void Main(string[] args)
+        ///Declare Variables
+        
+        int i;
+        int Dim;
+        int IttN;
+        int AcceptN;
+        double U;
+        double alpha;
+        decimal theta;
+        decimal h;
+        decimal previous;
+        decimal nextp;
+
+
+        ///Define TargetPI Method
+        
+        public decimal TargetPI(int Dim,int U,decimal theta, decimal h)
         {
-
-            int i, sum = 0, n;
-            Console.Write("Enter the Nth Number : ");
-            n = int.Parse(Console.ReadLine());
-            for (i = 0; i <= n; i++)
+            if (theta < 0 || theta > 1)
             {
-                sum = sum + i;
+                return 0;
             }
-
-            Console.WriteLine("\nSum of N Numbers : " + sum);
-            Console.ReadLine();
+            else
+            {
+                return nextp(Dim, theta).ProbabilityMassFunction(h) * previous.PDF(theta); ///Probability Mass Function and Probabaility Density Function
+            }
         }
 
+        ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
 
+        public void MCMC()
+        {
+            for (i = 0; i < IttN; i++)
+            {
+                Random rand = new Random(); ///Generate random state
+                U = rand.NextDouble();
+                if (U < alpha)
+                {
+                    AcceptN += 1;
+                }
+            }
+        }
+        public void GenerateGraph()
+        { }
     }
 }
