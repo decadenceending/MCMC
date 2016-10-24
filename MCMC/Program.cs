@@ -20,6 +20,9 @@ namespace Main_MCMC
         decimal h;
         decimal previous;
         decimal nextp;
+        int[] XN;
+        int[] XN1;
+        int[] Y;
 
 
         ///Define TargetPI Method
@@ -42,15 +45,37 @@ namespace Main_MCMC
         {
             for (i = 0; i < IttN; i++)
             {
-                Random rand = new Random(); ///Generate random state
+                ///Insert simulate Y ~ q(j|XN=i), Y=j portion
+                
+                alpha=Math.Min(1,TargetPI(i|j)/TargetPI(j|i)) ///Needs Editing
+
+                ///Generate random state
+                
+                Random rand = new Random();
                 U = rand.NextDouble();
-                if (U < alpha)
+                if (U <= alpha)
                 {
                     AcceptN += 1;
                 }
+                else
+                {
+                    XN1=XN
+                }
+                (1/IttnN)
             }
         }
-        public void GenerateGraph()
-        { }
+        public class Graph()
+        {
+        private List<XN>[] childNodes;
+        public Graph(XN size)
+        {
+            this.childNodes = new List<XN>[size];
+            for (int i = 0; i < size;i++)
+            {
+                this.childNodes[i] = new List<XN>();
+            }
+        }
+        }
+
     }
 }
