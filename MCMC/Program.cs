@@ -58,6 +58,13 @@ namespace Main_MCMC
             return U;
         }
 
+        ///Calculate alpha value Method
+
+        public double AlphaCalc()
+        {
+            return Math.Min(1, PiRatio() * (QRatio(,) / QRatio(,)));
+        }
+
         ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
         
         public void MCMC()
@@ -66,11 +73,17 @@ namespace Main_MCMC
             {
                 ///Insert simulate Y ~ q(j|XN=i), Y=j portion
 
-                alpha = Math.Min(1, PiRatio*(QRatio(,) / QRatio(,))); ///Needs Editing
 
-                ///Generate random state by calling Rnd method
+
+                ///Call AlphaCalc Method
+
+                alpha = AlphaCalc(); 
+
+                ///Generate random state by calling Rnd Method
 
                 double U = Rnd();
+
+                ///'If' statement to check criteria for accepting a proposed state 
 
                 if (U <= alpha)
                 {
