@@ -29,7 +29,7 @@ namespace Main_MCMC
 
         ///Define TargetPI Method
         
-        public decimal TargetPI(int Dim,int U,decimal theta, decimal h)
+        public decimal TargetPI(int Dim,double U,decimal theta, decimal h)
         {
             if (theta < 0 || theta > 1)
             {
