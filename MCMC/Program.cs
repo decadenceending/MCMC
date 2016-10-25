@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Main_MCMC
 {
+
     class program
     {
         ///Declare Variables
@@ -23,6 +24,7 @@ namespace Main_MCMC
         int[] XN;
         int[] XN1;
         int[] Y;
+        decimal MCMCSUM;
 
 
         ///Define TargetPI Method
@@ -39,43 +41,52 @@ namespace Main_MCMC
             }
         }
 
-        ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
+        ///Define Random Number Generator Method
 
+        public double Rnd()
+        {
+            Random rand = new Random();
+            double U = rand.NextDouble();
+            return U;
+        }
+        ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
         public void MCMC()
         {
             for (i = 0; i < IttN; i++)
             {
                 ///Insert simulate Y ~ q(j|XN=i), Y=j portion
-                
-                alpha=Math.Min(1,TargetPI(i|j)/TargetPI(j|i)) ///Needs Editing
 
-                ///Generate random state
-                
-                Random rand = new Random();
-                U = rand.NextDouble();
+                alpha = Math.Min(1, TargetPI(i | j) / TargetPI(j | i)); ///Needs Editing
+
+                ///Generate random state by calling Rnd method
+
+                double U = Rnd();
+
                 if (U <= alpha)
                 {
                     AcceptN += 1;
                 }
                 else
                 {
-                    XN1=XN
+                    XN1 = XN;
                 }
-                (1/IttnN)
+
+                ///Calculating the sum
+
+                MCMCSUM=(1 / IttN);
             }
         }
         public class Graph()
         {
-        private List<XN>[] childNodes;
-        public Graph(XN size)
-        {
-            this.childNodes = new List<XN>[size];
-            for (int i = 0; i < size;i++)
+        
+            private List<XN>[] childNodes;
+            public Graph(XN size)
             {
-                this.childNodes[i] = new List<XN>();
+                this.childNodes = new List<XN>[size];
+                for (int i = 0; i < size;i++)
+                {
+                    this.childNodes[i] = new List<XN>();
+                }
             }
-        }
-        }
-
     }
 }
