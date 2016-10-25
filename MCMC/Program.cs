@@ -39,8 +39,7 @@ namespace Main_MCMC
 
         public double PiRatio(double ThetaC, double ThetaN,int Temp)
         {
-            PiR=Math.Exp(-(ThetaN - ThetaC) / Temp);
-            return PiR;
+            return Math.Exp(-(ThetaN - ThetaC) / Temp);
         }
 
         ///Defina Ratio of q's
@@ -67,7 +66,7 @@ namespace Main_MCMC
             {
                 ///Insert simulate Y ~ q(j|XN=i), Y=j portion
 
-                alpha = Math.Min(1, PiR*(PiRatio(,) / PiRatio(,))); ///Needs Editing
+                alpha = Math.Min(1, PiRatio*(QRatio(,) / QRatio(,))); ///Needs Editing
 
                 ///Generate random state by calling Rnd method
 
