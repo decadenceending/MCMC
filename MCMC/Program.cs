@@ -15,30 +15,39 @@ namespace Main_MCMC
         int Dim;
         int IttN;
         int AcceptN;
+        int Temp;
         double U;
         double alpha;
-        decimal theta;
-        decimal h;
-        decimal previous;
-        decimal nextp;
+        double ThetaC;
+        double ThetaN;
+        double h;
+        double PiR;
+        double QR;
         int[] XN;
         int[] XN1;
         int[] Y;
         decimal MCMCSUM;
 
+        ///Define Theta Method
 
-        ///Define TargetPI Method
-        
-        public decimal TargetPI(int Dim,double U,decimal theta, decimal h)
+        public double ThetaMethod()
         {
-            if (theta < 0 || theta > 1)
-            {
-                return 0;
-            }
-            else
-            {
-                return nextp(Dim, theta).ProbabilityMassFunction(h) * previous.PDF(theta); ///Probability Mass Function and Probabaility Density Function
-            }
+            return ThetaC;
+        }
+
+        ///Define Ratio of Pi Method
+
+        public double PiRatio(double ThetaC, double ThetaN,int Temp)
+        {
+            PiR=Math.Exp(-(ThetaN - ThetaC) / Temp);
+            return PiR;
+        }
+
+        ///Defina Ratio of q's
+
+        public double QRatio()
+        {
+            return QR;
         }
 
         ///Define Random Number Generator Method
@@ -49,14 +58,16 @@ namespace Main_MCMC
             double U = rand.NextDouble();
             return U;
         }
+
         ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
+        
         public void MCMC()
         {
             for (i = 0; i < IttN; i++)
             {
                 ///Insert simulate Y ~ q(j|XN=i), Y=j portion
 
-                alpha = Math.Min(1, TargetPI(i | j) / TargetPI(j | i)); ///Needs Editing
+                alpha = Math.Min(1, PiR*(PiRatio(,) / PiRatio(,))); ///Needs Editing
 
                 ///Generate random state by calling Rnd method
 
@@ -76,6 +87,9 @@ namespace Main_MCMC
                 MCMCSUM=(1 / IttN);
             }
         }
+
+        ///Graph Generation
+
         public class Graph()
         {
         
