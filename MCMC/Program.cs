@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Main_MCMC
 {
 
@@ -17,6 +18,9 @@ namespace Main_MCMC
         int AcceptN;
         int Temp;
         int R;
+        int W; ///number of edge mutations
+        int M; ///number of vertices
+        int B; ///number of edges that could make the graph disconnected
         double U;
         double alpha;
         double ThetaC;
@@ -27,17 +31,12 @@ namespace Main_MCMC
         int[] XN;
         int[] XN1;
         int[] Y;
-        decimal MCMCSUM;
+        double MCMCSUM;
 
-        ///Define Theta Method
+        ///Define Theta Method, where double sum is subtracted from single sum
 
         public double ThetaMethod()
         {
-           
-
-
-
-
             return ThetaC;
         }
 
@@ -48,11 +47,11 @@ namespace Main_MCMC
             return Math.Exp(-(ThetaN - ThetaC) / Temp);
         }
 
-        ///Defina Ratio of q's
+        ///Defina Ratio of q's, q(i|j)/q(j|i)
 
-        public double QRatio()
+        public double QRatio(int B,int M,int W)
         {
-            return QR;
+            return (1/W)/((M*(M-1))/(2-B));
         }
 
         ///Define Random Number Generator Method
@@ -67,7 +66,7 @@ namespace Main_MCMC
 
         public double AlphaCalc()
         {
-            return Math.Min(1, PiRatio(ThetaC,ThetaN,Temp) * (QRatio(,) / QRatio(,)));
+            return Math.Min(1, PiRatio(ThetaC,ThetaN,Temp) * (QRatio(B,M,W)));
         }
 
         ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
@@ -105,19 +104,5 @@ namespace Main_MCMC
             }
         }
 
-        ///Graph Generation
-
-        public class Graph()
-        {
-        
-            private List<XN>[] childNodes;
-            public Graph(XN size)
-            {
-                this.childNodes = new List<XN>[size];
-                for (int i = 0; i < size;i++)
-                {
-                this.childNodes[i] = new List<XN>();
-                }
-            }
     }
 }
