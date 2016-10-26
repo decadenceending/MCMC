@@ -16,6 +16,7 @@ namespace Main_MCMC
         int IttN;
         int AcceptN;
         int Temp;
+        int R;
         double U;
         double alpha;
         double ThetaC;
@@ -32,6 +33,11 @@ namespace Main_MCMC
 
         public double ThetaMethod()
         {
+           
+
+
+
+
             return ThetaC;
         }
 
@@ -54,15 +60,14 @@ namespace Main_MCMC
         public double Rnd()
         {
             Random rand = new Random();
-            double U = rand.NextDouble();
-            return U;
+            return rand.NextDouble();
         }
 
         ///Calculate alpha value Method
 
         public double AlphaCalc()
         {
-            return Math.Min(1, PiRatio() * (QRatio(,) / QRatio(,)));
+            return Math.Min(1, PiRatio(ThetaC,ThetaN,Temp) * (QRatio(,) / QRatio(,)));
         }
 
         ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
@@ -111,7 +116,7 @@ namespace Main_MCMC
                 this.childNodes = new List<XN>[size];
                 for (int i = 0; i < size;i++)
                 {
-                    this.childNodes[i] = new List<XN>();
+                this.childNodes[i] = new List<XN>();
                 }
             }
     }
