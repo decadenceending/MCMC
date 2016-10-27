@@ -17,3 +17,9 @@ Markov Chain Monte Carlo is an effective statistical tool. Using
 
  What is the expected maximum distance of the shortest path in a graph that
  connects vertex 0 to another vertex.
+
+ The project package can be executed in Visual Studio. OpenCover is a tool
+ that was used to test code coverage.
+
+ Graphs class was imported from "Fundamentals of Computer Programming with
+ C#.""
