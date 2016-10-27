@@ -11,22 +11,35 @@ namespace Test_MCMC
         public void MCMC_Acceptance_TestMethod()
             ///Asses functionality of trial acceptance portion
         {
-            double U = 0.01;double alpha = 0.05; int AcceptN = 0;int IttN = 10; int ActualAcceptN = 0;
+            int B=2;int M=9;int W=34; int ActualQR = 1 / 1156;
 
-            MCMC(U, alpha, IttN, AcceptN);
-            int ActualAcceptN=AcceptN.MCMC
-            Assert.AreEqual(IttN, ActualAcceptN, 0, "Loop is not evaluating if statement correctly");
+            double QR = new MCMC().QRatio(B,M,W);
+
+            Assert.AreEqual(QR,ActualQR);
 
         }
+
         public void MCMC_Random_U_TestMethod()
             ///Asses functionality of random value generator, by comparing a generator values, if it between 0 and 1
         {
+            double GenU = new MCMC().Rnd();
 
+            bool RndExp = true;
+
+            bool RndStat;
+
+            if (GenU >= 0 && GenU <= 1)
+            {
+                RndStat = true;
+            }
+
+            Assert.AreEqual(RndStat, RndExp);
         }
+
         public void MCMC_TargetPI_Ratio_TestMethod()
             ///Asses functionality of ratio calculations, alpha
         {
-
+            Assert.
         }
     }
 }

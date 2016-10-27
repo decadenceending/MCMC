@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Main_MCMC
 {
 
-    class MCMC
+    public class MCMC
     {
         ///Declare Variables
         
@@ -78,7 +78,15 @@ namespace Main_MCMC
             int Temp = 298;
             int R = 1;
             int IttN = 100;
-            int[] XN;
+            ///
+            ///Define Matrix of Weighted Edges.
+            ///Currently the array is defined between 3 vertices
+            ///
+            int[,] XN = new int[3,3] {
+                { 1, 2, 3 }, 
+                { 4, 5, 6 }, 
+                { 7, 8, 9 }
+            };
 
             for (int i = 0; i < IttN; i++)
             {
@@ -112,7 +120,7 @@ namespace Main_MCMC
 
                 if (U <= alpha)
                 {
-                    AcceptN; ///Edit, keep the generated graph
+                    int [,] AcceptN= new int[1,IttN]; ///Edit, keep the generated graph
                 }
                 else
                 {
