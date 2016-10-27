@@ -64,7 +64,7 @@ namespace Main_MCMC
 
         ///Calculate alpha value Method
 
-        public double AlphaCalc()
+        public double AlphaCalc(double PiR,double QR)
         {
             return Math.Min(1, PiR * QR);
         }

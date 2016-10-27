@@ -8,7 +8,7 @@ namespace Test_MCMC
     public class MCMC_Loop_UnitTest
     {
         [TestMethod]
-        public void MCMC_Acceptance_TestMethod()
+        public void MCMC_QRatio_Method()
             ///Asses functionality of trial acceptance portion
         {
             int B=2;int M=9;int W=34; int ActualQR = 1 / 1156;
@@ -44,6 +44,14 @@ namespace Test_MCMC
             double PiR = new MCMC().PiRatio(ThetaI,ThetaJ,Temp);
 
             Assert.AreEqual(PiR, PiRExp, 0.0001);
+        }
+
+        public void MCMC_AlphaCalc_TestMethod()
+        {
+            double PiR = 1.01682;double QR = 1 / 1156;double alphaExp = 0.000879688;
+            double alpha = new MCMC().AlphaCalc(PiR, QR);
+            Assert.AreEqual(alpha, alphaExp, 0.0000001);
+            
         }
     }
 }
