@@ -102,7 +102,7 @@ namespace Main_MCMC
 
                 ///Call PiRatio Method to be used in alpha calculations
 
-                double PiR = new MCMC().PiRatio(ThetaI,ThetaJ,Temp,R);
+                double PiR = new MCMC().PiRatio(ThetaI,ThetaJ,Temp);
 
                 ///Call QRatio Method to be used in alpha calculations
 
@@ -110,7 +110,7 @@ namespace Main_MCMC
 
                 ///Call AlphaCalc Method
 
-                double alpha = new MCMC().AlphaCalc(); 
+                double alpha = new MCMC().AlphaCalc(PiR,QR); 
 
                 ///Generate random state by calling Rnd Method
 
