@@ -14,9 +14,9 @@ namespace Main_MCMC
         
         int i;
         int IttN;
-        int[] AcceptN;
+        int[,] AcceptN;
         int Temp;
-        int R;
+        double R;
         int W; ///number of edge mutations possible
         int M; ///number of vertices
         int B; ///number of edges that could make the graph disconnected
@@ -28,16 +28,15 @@ namespace Main_MCMC
         double h;
         double PiR;
         double QR;
-        int[] XN;
-        int[] XN1;
+        int[,] XN;
+        int[,] XN1;
         int[] Y;
-        double MCMCSUM;
-   
+  
         ///Define Theta Method, where double sum is subtracted from single sum
 
-        public double ThetaMethod(int M, double R)
+        public double ThetaMethod(int [,] XN,int M, double R)
         {
-            return ThetaCalc;
+            return R*(XN.Sum());
         }
 
         ///Define Ratio of Pi Method
@@ -69,15 +68,16 @@ namespace Main_MCMC
             return Math.Min(1, PiR * QR);
         }
 
-        ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
+        ///Define MCMC Method, with For Loop, and through calling previously defined methods
         
         static void Main()
         {
             ///Define adjustable fixed values of Temp and r
 
             int Temp = 298;
-            int R = 1;
+            double R = 1;
             int IttN = 100;
+            int M = 3; ///based on the graph with 3 vertices
             ///
             ///Define Matrix of Weighted Edges.
             ///Currently the array is defined between 3 vertices
@@ -88,6 +88,12 @@ namespace Main_MCMC
                 { 7, 8, 9 }
             };
 
+            int[,] XN1 = new int[3, 3];
+
+            int[,] AcceptN = new int[1, IttN];
+
+            ///Define the loop
+
             for (int i = 0; i < IttN; i++)
             {
                 ///Insert simulate Y ~ q(j|XN=i), Y=j portion
@@ -96,9 +102,9 @@ namespace Main_MCMC
 
                 ///Call ThetaMethod for Theta I and Theta J
 
-                double ThetaI = new MCMC().ThetaMethod();
+                double ThetaI = new MCMC().ThetaMethod(XN,M,R);
 
-                double ThetaJ = new MCMC().ThetaMethod();
+                double ThetaJ = new MCMC().ThetaMethod(XN,M,R);
 
                 ///Call PiRatio Method to be used in alpha calculations
 
@@ -106,7 +112,7 @@ namespace Main_MCMC
 
                 ///Call QRatio Method to be used in alpha calculations
 
-                double QR = new MCMC().QRatio();
+                double QR = new MCMC().QRatio(B,M,W);
 
                 ///Call AlphaCalc Method
 
@@ -120,17 +126,17 @@ namespace Main_MCMC
 
                 if (U <= alpha)
                 {
-                    int [,] AcceptN= new int[1,IttN]; ///Edit, keep the generated graph
+                    int [,] AcceptN; ///Edit, keep the generated graph
                 }
                 else
                 {
                     XN1 = XN;
                 }
-
-                ///Calculating the sum
-
-                double MCMCSUM=(1 / IttN);
             }
+
+            ///Calculating the sum
+
+            double h = (1 / IttN) * AcceptN.Sum();///Edit,
         }
 
     }
