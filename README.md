@@ -2,6 +2,8 @@
 
 CHE477 Markov Chain - Monte Carlo Project
 
+Orkhan Abdullayev
+
 Markov Chain Monte Carlo is an effective statistical tool. Using
  Metropolis-Hastings algorithm, this program aims to model some fundamental
  attributes for Marko Chain Monte Carlo simulations.
