@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 namespace Main_MCMC
 {
 
-    class program
+    class MCMC
     {
         ///Declare Variables
         
         int i;
-        int Dim;
         int IttN;
-        int AcceptN;
+        int[] AcceptN;
         int Temp;
         int R;
-        int W; ///number of edge mutations
+        int W; ///number of edge mutations possible
         int M; ///number of vertices
         int B; ///number of edges that could make the graph disconnected
+        int VM; /// minimum number of edges needed to make the graph connected
         double U;
         double alpha;
-        double ThetaC;
-        double ThetaN;
+        double ThetaI;
+        double ThetaJ;
         double h;
         double PiR;
         double QR;
@@ -32,26 +32,26 @@ namespace Main_MCMC
         int[] XN1;
         int[] Y;
         double MCMCSUM;
-
+   
         ///Define Theta Method, where double sum is subtracted from single sum
 
         public double ThetaMethod()
         {
-            return ThetaC;
+            return ThetaCalc;
         }
 
         ///Define Ratio of Pi Method
 
-        public double PiRatio(double ThetaC, double ThetaN,int Temp)
+        public double PiRatio(double ThetaI, double ThetaJ,int Temp, double R)
         {
-            return Math.Exp(-(ThetaN - ThetaC) / Temp);
+            return Math.Exp(-(ThetaI - ThetaJ) / Temp);
         }
 
         ///Defina Ratio of q's, q(i|j)/q(j|i)
 
         public double QRatio(int B,int M,int W)
         {
-            return (1/W)/((M*(M-1))/(2-B));
+            return (1/W)/((((M*(M-1))/2)-B));
         }
 
         ///Define Random Number Generator Method
@@ -66,32 +66,53 @@ namespace Main_MCMC
 
         public double AlphaCalc()
         {
-            return Math.Min(1, PiRatio(ThetaC,ThetaN,Temp) * (QRatio(B,M,W)));
+            return Math.Min(1, PiR * QR);
         }
 
         ///Define MCMC Method, with For Loop, with random state generator and acceptance argument
         
-        public void MCMC()
+        static void Main()
         {
-            for (i = 0; i < IttN; i++)
+            ///Define adjustable fixed values of Temp and r
+
+            int Temp = 298;
+            int R = 1;
+            int IttN = 100;
+            int[] XN;
+
+            for (int i = 0; i < IttN; i++)
             {
                 ///Insert simulate Y ~ q(j|XN=i), Y=j portion
+                
 
 
+                ///Call ThetaMethod for Theta I and Theta J
+
+                double ThetaI = new MCMC().ThetaMethod();
+
+                double ThetaJ = new MCMC().ThetaMethod();
+
+                ///Call PiRatio Method to be used in alpha calculations
+
+                double PiR = new MCMC().PiRatio(ThetaI,ThetaJ,Temp,R);
+
+                ///Call QRatio Method to be used in alpha calculations
+
+                double QR = new MCMC().QRatio();
 
                 ///Call AlphaCalc Method
 
-                alpha = AlphaCalc(); 
+                double alpha = new MCMC().AlphaCalc(); 
 
                 ///Generate random state by calling Rnd Method
 
-                double U = Rnd();
+                double U = new MCMC().Rnd();
 
                 ///'If' statement to check criteria for accepting a proposed state 
 
                 if (U <= alpha)
                 {
-                    AcceptN += 1;
+                    AcceptN; ///Edit, keep the generated graph
                 }
                 else
                 {
@@ -100,7 +121,7 @@ namespace Main_MCMC
 
                 ///Calculating the sum
 
-                MCMCSUM=(1 / IttN);
+                double MCMCSUM=(1 / IttN);
             }
         }
 
