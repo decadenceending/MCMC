@@ -9,7 +9,8 @@ namespace Test_MCMC
     {
         [TestMethod]
         public void MCMC_QRatio_Method()
-            ///Asses functionality of trial acceptance portion
+
+            ///Asses functionality of Q Ratio calculations
         {
             int B=2;int M=9;int W=34; int ActualQR = 1 / 1156;
 
@@ -20,6 +21,7 @@ namespace Test_MCMC
         }
 
         public void MCMC_Random_U_TestMethod()
+
             ///Asses functionality of random value generator, by comparing a generator values, if it between 0 and 1
         {
             double GenU = new MCMC().Rnd();
@@ -37,7 +39,7 @@ namespace Test_MCMC
         }
 
         public void MCMC_TargetPI_Ratio_TestMethod()
-            ///Asses functionality of ratio calculations, alpha
+            ///Asses functionality of Pi Ratio Calculations
         {
             int ThetaI = 100; int ThetaJ = 105; int Temp = 298; double PiRExp = 1.01692;
 
@@ -48,6 +50,8 @@ namespace Test_MCMC
 
         public void MCMC_AlphaCalc_TestMethod()
         {
+            ///Asses fuintionality of alpha calculations
+            
             double PiR = 1.01682;double QR = 1 / 1156;double alphaExp = 0.000879688;
             double alpha = new MCMC().AlphaCalc(PiR, QR);
             Assert.AreEqual(alpha, alphaExp, 0.0000001);
