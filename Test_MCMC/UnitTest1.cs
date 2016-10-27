@@ -26,7 +26,7 @@ namespace Test_MCMC
 
             bool RndExp = true;
 
-            bool RndStat;
+            bool RndStat = false;
 
             if (GenU >= 0 && GenU <= 1)
             {
@@ -39,7 +39,11 @@ namespace Test_MCMC
         public void MCMC_TargetPI_Ratio_TestMethod()
             ///Asses functionality of ratio calculations, alpha
         {
-            Assert.
+            int ThetaI = 100; int ThetaJ = 105; int Temp = 298; double PiRExp = 1.01692;
+
+            double PiR = new MCMC().PiRatio(ThetaI,ThetaJ,Temp);
+
+            Assert.AreEqual(PiR, PiRExp, 0.0001);
         }
     }
 }

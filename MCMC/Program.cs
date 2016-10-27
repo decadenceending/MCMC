@@ -35,14 +35,14 @@ namespace Main_MCMC
    
         ///Define Theta Method, where double sum is subtracted from single sum
 
-        public double ThetaMethod()
+        public double ThetaMethod(int M, double R)
         {
             return ThetaCalc;
         }
 
         ///Define Ratio of Pi Method
 
-        public double PiRatio(double ThetaI, double ThetaJ,int Temp, double R)
+        public double PiRatio(double ThetaI, double ThetaJ,int Temp)
         {
             return Math.Exp(-(ThetaI - ThetaJ) / Temp);
         }
