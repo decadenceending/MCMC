@@ -36,7 +36,7 @@ namespace Main_MCMC
 
         public double ThetaMethod(int [,] XN,int M, double R)
         {
-            return R*(XN.Sum());
+            return R*XN.Cast<int>().Sum(); 
         }
 
         ///Define Ratio of Pi Method
@@ -93,7 +93,7 @@ namespace Main_MCMC
 
             int[,] XN1 = new int[3, 3];
 
-            int[] AcceptN = new int[IttN];
+            List<int[,]> AcceptN = new List<int[,]>();
 
             ///Define the loop
 
@@ -129,12 +129,17 @@ namespace Main_MCMC
 
                 if (U <= alpha)
                 {
-                    AcceptN[i]=XN1; ///Edit, keep the generated graph
+                    ///Edit, keep the generated graph
+                    AcceptN.Add(XN1);
+
+
                 }
                 else
                 {
-                    XN1 = XN;
+                    
                 }
+
+                double h = (1 / IttN) * AcceptN.Cast<int>().Sum();///Edit,
             }
         }
 
