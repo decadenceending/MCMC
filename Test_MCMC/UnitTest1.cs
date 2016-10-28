@@ -19,7 +19,7 @@ namespace Test_MCMC
             Assert.AreEqual(QR,ActualQR);
 
         }
-
+        [TestMethod]
         public void MCMC_Random_U_TestMethod()
 
             ///Asses functionality of random value generator, by comparing a generator values, if it between 0 and 1
@@ -37,7 +37,7 @@ namespace Test_MCMC
 
             Assert.AreEqual(RndStat, RndExp);
         }
-
+        [TestMethod]
         public void MCMC_TargetPI_Ratio_TestMethod()
             ///Asses functionality of Pi Ratio Calculations
         {
@@ -47,14 +47,14 @@ namespace Test_MCMC
 
             Assert.AreEqual(PiR, PiRExp, 0.0001);
         }
-
+        [TestMethod]
         public void MCMC_AlphaCalc_TestMethod()
         {
             ///Asses fuintionality of alpha calculations
             
-            double PiR = 1.01682;double QR = 1 / 1156;double alphaExp = 0.000879688;
+            double PiR = 1.01682;double QR = 1 / 1156;double alphaExp = 0;
             double alpha = new MCMC().AlphaCalc(PiR, QR);
-            Assert.AreEqual(alpha, alphaExp, 0.0000001);
+            Assert.AreEqual(alpha, alphaExp, 0.000000001);
             
         }
     }
