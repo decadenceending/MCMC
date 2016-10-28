@@ -74,10 +74,14 @@ namespace Main_MCMC
         {
             ///Define adjustable fixed values of Temp and r
 
+            int M = 3;///based on the graph with 3 vertices
+
+            int B = 2; ///NEEDS TO BE CALCULATED FOR EACH LOOP, CURRENTLY PLACEHOLDER
+
+            int W = ((M * (M - 1)) / 2) - B;
             int Temp = 298;
             double R = 1;
             int IttN = 100;
-            int M = 3; ///based on the graph with 3 vertices
             ///
             ///Define Matrix of Weighted Edges.
             ///Currently the array is defined between 3 vertices
@@ -85,12 +89,11 @@ namespace Main_MCMC
             int[,] XN = new int[3,3] {
                 { 1, 2, 3 }, 
                 { 4, 5, 6 }, 
-                { 7, 8, 9 }
-            };
+                { 7, 8, 9 }};
 
             int[,] XN1 = new int[3, 3];
 
-            int[,] AcceptN = new int[1, IttN];
+            int[] AcceptN = new int[IttN];
 
             ///Define the loop
 
@@ -126,17 +129,13 @@ namespace Main_MCMC
 
                 if (U <= alpha)
                 {
-                    int [,] AcceptN; ///Edit, keep the generated graph
+                    AcceptN[i]=XN1; ///Edit, keep the generated graph
                 }
                 else
                 {
                     XN1 = XN;
                 }
             }
-
-            ///Calculating the sum
-
-            double h = (1 / IttN) * AcceptN.Sum();///Edit,
         }
 
     }
