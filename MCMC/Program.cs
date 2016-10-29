@@ -98,7 +98,6 @@ namespace Main_MCMC
                 { 4, 5, 6 },
                 { 7, 8, 9 }};
 
-            int[,] XN1 = new int[3, 3];
             int[,] Y = new int[3,3];
 
             List<int[,]> AcceptN = new List<int[,]>();
@@ -116,11 +115,16 @@ namespace Main_MCMC
 
                 if (XN[ic,jc]!=0)
                 {
+
+                    ///Remove simulated element if not equal to 0, and set it to zero
+
                     Y = XN;
                     Y[ic, jc] = 0;
                 }
                 else
                 {
+                    ///Append array if the simulated element is 0
+                    
                     Y = XN;
                     Y[ic, jc] = 1;
 
@@ -153,15 +157,12 @@ namespace Main_MCMC
                 if (U <= alpha)
                 {
                     ///Keep the generated graph
-                    
+
                     AcceptN.Add(XN1);
 
-                    XN1 = Y;
+                    XN = Y;
 
-                }
-                else
-                {
-                    XN1 = XN;
+                    ///Otherwise keep XN as is and simulate again
                 }
 
                 ///Automatically flattens an array and adds the elements
