@@ -15,6 +15,7 @@ namespace Main_MCMC
         int i;
         int IttN;
         int[,] AcceptN;
+        int[,] Top1Percent;
         int Temp;
         int R;
         int W; ///number of edge mutations possible
@@ -173,10 +174,23 @@ namespace Main_MCMC
 
                 Console.Write(h);
 
+                ///Displaying top 1%, Sort the list then assign top 1% items in the sorted list to a new array
+                
+                double top1=IttN*0.01;
+
+                ///Round top 1% to the next integer
+
+                int top1round = Convert.ToInt32(top1);
+
+                ///Assign top 1% elements to a new List
+
+                List<int[,]> Top1Percent = AcceptN.GetRange(0,top1round);
+
+                Top1Percent.ForEach(Console.WriteLine);
+
+
                 ///Generating a graph based on the listed edges connecting vertices
-                
-                
-                
+
                 ///Plotting the results for a number of trials
 
             }
