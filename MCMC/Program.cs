@@ -16,7 +16,7 @@ namespace Main_MCMC
         int IttN;
         int[,] AcceptN;
         int Temp;
-        double R;
+        int R;
         int W; ///number of edge mutations possible
         int M; ///number of vertices
         int B; ///number of edges that could make the graph disconnected
@@ -73,7 +73,7 @@ namespace Main_MCMC
         public int RndCoord()
         {
             Random rnd = new Random();
-            return rnd.Next(1, M);
+            return rnd.Next(1, 3);
         }
         ///Define MCMC Method, with For Loop, and through calling previously defined methods
 
@@ -87,7 +87,7 @@ namespace Main_MCMC
 
             int W = ((M * (M - 1)) / 2) - B;
             int Temp = 298;
-            double R = 1;
+            int R = 1;
             int IttN = 100;
             ///
             ///Define Matrix of Weighted Edges.
@@ -152,17 +152,25 @@ namespace Main_MCMC
 
                 if (U <= alpha)
                 {
-                    ///Edit, keep the generated graph
+                    ///Keep the generated graph
+                    
                     AcceptN.Add(XN1);
 
+                    XN1 = Y;
 
                 }
                 else
                 {
-
+                    XN1 = XN;
                 }
 
-                double h = (1 / IttN) * AcceptN.Cast<int>().Sum();///Edit,
+                ///Automatically flattens an array and adds the elements
+
+                double h = (1 / IttN) * AcceptN.Cast<int>().Sum(); ///Edit,
+
+                ///Display expected h
+
+                Console.Write(h);
 
                 ///Generating a graph based on the listed edges connecting vertices
                 

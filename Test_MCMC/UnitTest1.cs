@@ -57,5 +57,25 @@ namespace Test_MCMC
             Assert.AreEqual(alpha, alphaExp, 0.000000001);
             
         }
+        [TestMethod]
+        public void MCMC_Random_Coord_TestMethod()
+
+        ///Asses functionality of random value generator for simulating a new sample state
+        {
+            int GenCoord = new MCMC().RndCoord();
+
+            bool RndCoordExp = true;
+
+            bool RndCoordStat = false;
+
+            ///Second arument of 3 needs to be adjusted based on the dimension of the grid
+
+            if (GenCoord >= 1 && GenCoord <= 3)
+            {
+                RndCoordStat = true;
+            }
+
+            Assert.AreEqual(RndCoordStat, RndCoordExp);
+        }
     }
 }
