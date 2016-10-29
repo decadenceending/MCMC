@@ -158,7 +158,7 @@ namespace Main_MCMC
                 {
                     ///Keep the generated graph
 
-                    AcceptN.Add(XN1);
+                    AcceptN.Add(Y);
 
                     XN = Y;
 
